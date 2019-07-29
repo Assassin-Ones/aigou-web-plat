@@ -16,7 +16,7 @@ import routes from './routes'
 import 'font-awesome/css/font-awesome.min.css'
 
 import axios from 'axios'
-axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5d3e7c203493552e9f5191a6/plat'  //对应后端网关统一地址
+axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5d3efc2add425d65229ab0eb/plat'  //对应后端网关统一地址
 // 将API方法绑定到全局  /plat/login
 Vue.prototype.$http = axios //js对象原型
 Vue.config.productionTip = false
