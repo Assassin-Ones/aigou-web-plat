@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import { requestLogin } from '../api/api';
+  // import { requestLogin } from '../api/api';
   //import NProgress from 'nprogress'
   export default {
     data() {
@@ -51,7 +51,7 @@
             this.logining = true;
             //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
+           /* requestLogin(loginParams).then(data => {
               this.logining = false;
               //NProgress.done();
               let { msg, code, user } = data;
@@ -62,9 +62,27 @@
                 });
               } else {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
+                this.$router.push({ path: '/echarts' });
               }
-            });
+            });*/
+
+              //自定义axios发送ajax请求
+              this.$http.post("/login",loginParams)
+                  .then(res => {
+                  //停止图标转圈圈
+                  this.logining = false;
+                  // res.data 响应的data中才有数据
+                  let {message,errorCode,restObj,success} = res.data;
+                  if (!success) {
+                      this.$message({
+                          message: message,
+                          type: 'error'
+                      });
+                  } else {
+                      sessionStorage.setItem('user', JSON.stringify(restObj));
+                      this.$router.push({ path: '/echarts' });
+                  }
+              });
           } else {
             console.log('error submit!!');
             return false;
